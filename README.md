@@ -153,13 +153,13 @@ The skill supports 18 tafsir editions across various categories:
 
 ## 🔍 Usage Examples
 
-### Example 1: Turkish User Request
+### Example 1: Modern Turkish Reader
 ```
-User: "Türkçe okuyacağım, modern ve sade bir tefsir istiyorum"
+User: "I will read in Turkish, I want a modern and simple tafsir"
 
 LLM Analysis:
 - Language: Turkish → prefers Arabic or English
-- Style: "modern ve sade" → modern, simplified
+- Style: "modern and simple" → modern, simplified
 - Menhec: modern, simplified, arabic
 
 Command: python3 scripts/fetch_tafsir.py --verse "{verse}" --menhec "modern simplified"
@@ -168,7 +168,7 @@ Result: ar-tafsir-muyassar (21st-century, simplified, brief-explanation)
 
 ### Example 2: Hanafi Fiqh Student
 ```
-User: "Hanefi mezhebine uygun fıkhi tefsir"
+User: "Tafsir suitable for Hanafi school with jurisprudential focus"
 
 LLM Analysis:
 - School: hanafi
@@ -181,7 +181,7 @@ Result: en-tafsir-maarif-ul-quran (hanafi, deobandi, jurisprudential)
 
 ### Example 3: Academic Research
 ```
-User: "Akademik araştırma için klasik dönem rivayet tefsiri"
+User: "Classical period narrative tafsir for academic research"
 
 LLM Analysis:
 - Purpose: Academic → authoritative, comprehensive
@@ -195,7 +195,7 @@ Result: ar-tafsir-ibn-kathir (14th-century, riwayah, hadith-comprehensive)
 
 ### Example 4: Spiritual Seeker
 ```
-User: "Manevi anlamlar için tasavvufi tefsir"
+User: "Sufi tafsir for spiritual meanings"
 
 LLM Analysis:
 - Focus: Spiritual meanings
@@ -210,90 +210,90 @@ Result: en-kashf-al-asrar-tafsir (ishari, tasawwuf, mystical-linguistic)
 
 #### 5.1 Simple Verse Request
 ```
-User: "Bakara suresi 255. ayetinin tefsirini getir"
+User: "Get tafsir for Surah Al-Baqarah verse 255"
 
 LLM Analysis:
-- Verse: "Bakara 255" → surah=2, ayah=255
+- Verse: "Al-Baqarah 255" → surah=2, ayah=255
 - No menhec specified → default to riwayah (narrative-based)
 - Menhec: riwayah (default)
 
-Command: python3 scripts/fetch_tafsir.py --verse "Bakara 255" --menhec "riwayah"
+Command: python3 scripts/fetch_tafsir.py --verse "Al-Baqarah 255" --menhec "riwayah"
 Result: en-tafisr-ibn-kathir (riwayah, athari, hadith-based)
 ```
 
 #### 5.2 Verse with Methodology Preference
 ```
-User: "Fatiha suresi 1. ayeti için işari tefsir bul"
+User: "Find mystical tafsir for Surah Al-Fatihah verse 1"
 
 LLM Analysis:
-- Verse: "Fatiha 1" → surah=1, ayah=1
-- Methodology: "işari" → ishari (mystical/allegorical)
+- Verse: "Al-Fatihah 1" → surah=1, ayah=1
+- Methodology: "mystical" → ishari (mystical/allegorical)
 - Menhec: ishari
 
-Command: python3 scripts/fetch_tafsir.py --verse "Fatiha 1" --menhec "ishari"
+Command: python3 scripts/fetch_tafsir.py --verse "Al-Fatihah 1" --menhec "ishari"
 Result: en-kashf-al-asrar-tafsir (ishari, sufi-mystical, mystical-linguistic)
 ```
 
-#### 5.3 Modern Turkish Reader with Specific Verse
+#### 5.3 Modern Reader with Specific Verse
 ```
-User: "Yasin suresi 1. ayeti için Türkçe okuyacağım, modern ve sade bir tefsir"
+User: "For Surah Ya-Sin verse 1, I want a modern and simple tafsir in Arabic"
 
 LLM Analysis:
-- Verse: "Yasin 1" → surah=36, ayah=1
-- Language: Turkish → prefers Arabic
-- Style: "modern ve sade" → modern, simplified
+- Verse: "Ya-Sin 1" → surah=36, ayah=1
+- Language: Arabic preferred
+- Style: "modern and simple" → modern, simplified
 - Menhec: modern, simplified, arabic
 
-Command: python3 scripts/fetch_tafsir.py --verse "Yasin 1" --menhec "modern simplified arabic"
+Command: python3 scripts/fetch_tafsir.py --verse "Ya-Sin 1" --menhec "modern simplified arabic"
 Result: ar-tafsir-muyassar (21st-century, simplified, brief-explanation, arabic)
 ```
 
 #### 5.4 Hanafi Student with Specific Verse
 ```
-User: "Nisa suresi 34. ayetinin Hanefi mezhebine uygun fıkhi tefsiri"
+User: "Jurisprudential tafsir suitable for Hanafi school for Surah An-Nisa verse 34"
 
 LLM Analysis:
-- Verse: "Nisa 34" → surah=4, ayah=34
-- School: "Hanefi" → hanafi
-- Focus: "fıkhi" → jurisprudential, legal-focus
+- Verse: "An-Nisa 34" → surah=4, ayah=34
+- School: Hanafi → hanafi
+- Focus: "jurisprudential" → jurisprudential, legal-focus
 - Menhec: hanafi, jurisprudential, legal-focus
 
-Command: python3 scripts/fetch_tafsir.py --verse "Nisa 34" --menhec "hanafi jurisprudential legal-focus"
+Command: python3 scripts/fetch_tafsir.py --verse "An-Nisa 34" --menhec "hanafi jurisprudential legal-focus"
 Result: en-tafsir-maarif-ul-quran (hanafi, jurisprudential, socio-moral)
 ```
 
 #### 5.5 Academic Research for Specific Verse
 ```
-User: "Kehf suresi 18. ayeti için akademik araştırma amaçlı klasik dönem rivayet tefsiri"
+User: "Classical period narrative tafsir for academic research on Surah Al-Kahf verse 18"
 
 LLM Analysis:
-- Verse: "Kehf 18" → surah=18, ayah=18
-- Purpose: "akademik araştırma" → authoritative, comprehensive
-- Period: "klasik dönem" → classical
-- Methodology: "rivayet" → riwayah
+- Verse: "Al-Kahf 18" → surah=18, ayah=18
+- Purpose: "academic research" → authoritative, comprehensive
+- Period: "classical period" → classical
+- Methodology: "narrative" → riwayah
 - Menhec: classical, riwayah, hadith-comprehensive, encyclopedic
 
-Command: python3 scripts/fetch_tafsir.py --verse "Kehf 18" --menhec "classical riwayah hadith-comprehensive encyclopedic"
+Command: python3 scripts/fetch_tafsir.py --verse "Al-Kahf 18" --menhec "classical riwayah hadith-comprehensive encyclopedic"
 Result: ar-tafsir-al-tabari (10th-century, riwayah-foundational, encyclopedic, sened-based)
 ```
 
 #### 5.6 Spiritual Meaning for Specific Verse
 ```
-User: "Rahman suresi 1-3 ayetleri için manevi anlamlar içeren tasavvufi tefsir"
+User: "Sufi tafsir with spiritual meanings for Surah Ar-Rahman verses 1-3"
 
 LLM Analysis:
-- Verse: "Rahman 1-3" → surah=55, ayah=1-3 (script handles range)
-- Focus: "manevi anlamlar" → spiritual meanings
-- Methodology: "tasavvufi" → tasawwuf, ishari
+- Verse: "Ar-Rahman 1-3" → surah=55, ayah=1-3 (script handles range)
+- Focus: "spiritual meanings" → spiritual meanings
+- Methodology: "Sufi" → tasawwuf, ishari
 - Menhec: ishari, tasawwuf, spiritual-allusions
 
-Command: python3 scripts/fetch_tafsir.py --verse "Rahman 1-3" --menhec "ishari tasawwuf spiritual-allusions"
+Command: python3 scripts/fetch_tafsir.py --verse "Ar-Rahman 1-3" --menhec "ishari tasawwuf spiritual-allusions"
 Result: en-al-qushairi-tafsir (ishari, tasawwuf, spiritual-allusions, psychological-spiritual)
 ```
 
 #### 5.7 Simple Format with Default
 ```
-User: "2:16 tefsiri"
+User: "Tafsir for 2:16"
 
 LLM Analysis:
 - Verse: "2:16" → surah=2, ayah=16
@@ -319,28 +319,28 @@ Result: en-kashf-al-asrar-tafsir (ishari, sufi-mystical, mystical-linguistic)
 
 #### 5.9 Arabic Language Preference
 ```
-User: "آية الكرسي تفسير باللغة العربية"
+User: "Tafsir of Ayat al-Kursi in Arabic language"
 
 LLM Analysis:
-- Verse: "آية الكرسي" → Ayat al-Kursi → surah=2, ayah=255
-- Language: "باللغة العربية" → arabic
+- Verse: "Ayat al-Kursi" → Surah Al-Baqarah verse 255 → surah=2, ayah=255
+- Language: "Arabic language" → arabic
 - Menhec: arabic, riwayah (default for Arabic)
 
-Command: python3 scripts/fetch_tafsir.py --verse "Bakara 255" --menhec "arabic riwayah"
+Command: python3 scripts/fetch_tafsir.py --verse "Al-Baqarah 255" --menhec "arabic riwayah"
 Result: ar-tafsir-ibn-kathir (arabic, riwayah, hadith-comprehensive)
 ```
 
 #### 5.10 Salafi-Oriented Request
 ```
-User: "Müminun suresi 1-11 ayetleri için selefi eğilimli basit tefsir"
+User: "Simple Salafi-oriented tafsir for Surah Al-Mu'minun verses 1-11"
 
 LLM Analysis:
-- Verse: "Müminun 1-11" → surah=23, ayah=1-11
-- School: "selefi" → salafi
-- Style: "basit" → simplified
+- Verse: "Al-Mu'minun 1-11" → surah=23, ayah=1-11
+- School: "Salafi-oriented" → salafi
+- Style: "simple" → simplified
 - Menhec: salafi, simplified, brief-explanation
 
-Command: python3 scripts/fetch_tafsir.py --verse "Müminun 1-11" --menhec "salafi simplified brief-explanation"
+Command: python3 scripts/fetch_tafsir.py --verse "Al-Mu'minun 1-11" --menhec "salafi simplified brief-explanation"
 Result: ar-tafseer-al-saddi (salafi, simplified, brief-explanation, arabic)
 ```
 
