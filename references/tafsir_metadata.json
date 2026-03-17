@@ -1,0 +1,164 @@
+[
+  {
+    "author_name": "Hafiz Ibn Kathir",
+    "id": 169,
+    "language_name": "english",
+    "name": "Tafsir Ibn Kathir (abridged)",
+    "slug": "en-tafisr-ibn-kathir",
+    "source": "https://quran.com/",
+    "menhec": ["14th-century", "riwayah", "athari", "sunni", "hadith-based", "quran-by-quran", "anti-israiliyyat"]
+  },
+  {
+    "author_name": "Hafiz Ibn Kathir",
+    "id": 14,
+    "language_name": "arabic",
+    "name": "Tafsir Ibn Kathir",
+    "slug": "ar-tafsir-ibn-kathir",
+    "source": "https://quran.com/",
+    "menhec": ["14th-century", "riwayah", "athari", "sunni", "hadith-comprehensive", "shafi-jurisprudence"]
+  },
+  {
+    "author_name": "Mufti Muhammad Shafi",
+    "id": 168,
+    "language_name": "english",
+    "name": "Maarif-ul-Quran",
+    "slug": "en-tafsir-maarif-ul-quran",
+    "source": "https://quran.com/",
+    "menhec": ["20th-century", "hanafi", "deobandi", "dirayah", "jurisprudential", "socio-moral", "contemporary-problems"]
+  },
+  {
+    "author_name": "Saddi",
+    "id": 91,
+    "language_name": "arabic",
+    "name": "Tafseer Al Saddi",
+    "slug": "ar-tafseer-al-saddi",
+    "source": "https://quran.com/",
+    "menhec": ["20th-century", "sunni", "salafi", "athari", "taisir-al-karim", "simple-dirayah", "brief-explanation"]
+  },
+  {
+    "author_name": "Baghawy",
+    "id": 94,
+    "language_name": "arabic",
+    "name": "Tafseer Al-Baghawi",
+    "slug": "ar-tafsir-al-baghawi",
+    "source": "https://quran.com/",
+    "menhec": ["12th-century", "riwayah", "athari", "shafi", "hadith-focused", "sunni", "classical-tradition"]
+  },
+  {
+    "author_name": "Tanweer",
+    "id": 92,
+    "language_name": "arabic",
+    "name": "Tafseer Tanwir al-Miqbas",
+    "slug": "ar-tafseer-tanwir-al-miqbas",
+    "source": "https://quran.com/",
+    "menhec": ["15th-century-compilation", "ibn-abbas-attribution", "riwayah", "early-narratives", "sunni"]
+  },
+  {
+    "author_name": "Waseet",
+    "id": 93,
+    "language_name": "arabic",
+    "name": "Tafsir Al Wasit",
+    "slug": "ar-tafsir-al-wasit",
+    "source": "https://quran.com/",
+    "menhec": ["20th-century", "dirayah", "al-azhar-style", "linguistic", "modern-sunni", "systematic-analysis"]
+  },
+  {
+    "author_name": "Tabari",
+    "id": 15,
+    "language_name": "arabic",
+    "name": "Tafsir al-Tabari",
+    "slug": "ar-tafsir-al-tabari",
+    "source": "https://quran.com/",
+    "menhec": ["10th-century", "riwayah-foundational", "ijma-focused", "linguistic-analysis", "sunni", "encyclopedic", "sened-based"]
+  },
+  {
+    "author_name": "المیسر",
+    "id": 16,
+    "language_name": "arabic",
+    "name": "Tafsir Muyassar",
+    "slug": "ar-tafsir-muyassar",
+    "source": "https://quran.com/",
+    "menhec": ["21st-century", "sunni", "salafi-oriented", "simplified", "brief-explanation"]
+  },
+  {
+    "author_name": "Qurtubi",
+    "id": 90,
+    "language_name": "arabic",
+    "name": "Tafseer Al Qurtubi",
+    "slug": "ar-tafseer-al-qurtubi",
+    "source": "https://quran.com/",
+    "menhec": ["13th-century", "ahkam-jurisprudence", "maliki", "dirayah-riwayah-hybrid", "ethical-linguistic", "legal-focus"]
+  },
+  {
+    "author_name": "Maulana Wahid Uddin Khan",
+    "id": 817,
+    "language_name": "english",
+    "name": "Tazkirul Quran(Maulana Wahiduddin Khan)",
+    "slug": "en-tazkirul-quran",
+    "source": "https://quran.com/",
+    "menhec": ["20th-century", "reflective", "contemplative-dirayah", "da'wah", "modern-english-style"]
+  },
+  {
+    "author_name": "Kashf Al-Asrar Tafsir",
+    "id": 109,
+    "language_name": "english",
+    "name": "Kashf Al-Asrar Tafsir",
+    "slug": "en-kashf-al-asrar-tafsir",
+    "source": "https://www.altafsir.com/",
+    "menhec": ["12th-century", "sufism", "ishari", "tasawwuf", "persian-intellectual-tradition", "mystical-linguistic"]
+  },
+  {
+    "author_name": "Al Qushairi Tafsir",
+    "id": 108,
+    "language_name": "english",
+    "name": "Al Qushairi Tafsir",
+    "slug": "en-al-qushairi-tafsir",
+    "source": "https://www.altafsir.com/",
+    "menhec": ["11th-century", "ishari", "tasawwuf", "spiritual-allusions", "ashari-kalam", "psychological-spiritual"]
+  },
+  {
+    "author_name": "Kashani Tafsir",
+    "id": 107,
+    "language_name": "english",
+    "name": "Kashani Tafsir",
+    "slug": "en-kashani-tafsir",
+    "source": "https://www.altafsir.com/",
+    "menhec": ["14th-century", "shia", "isna-asher", "ithna-ashari", "ishari", "wahdat-al-wujud", "philosophical-sufism", "irfan"]
+  },
+  {
+    "author_name": "Tafsir al-Tustari",
+    "id": 93,
+    "language_name": "english",
+    "name": "Tafsir al-Tustari",
+    "slug": "en-tafsir-al-tustari",
+    "source": "https://www.altafsir.com/",
+    "menhec": ["9th-century", "early-tasawwuf", "sufism", "ishari", "ascetic-interpretation", "spiritual-significance"]
+  },
+  {
+    "author_name": "Asbab Al-Nuzul by Al-Wahidi",
+    "id": 86,
+    "language_name": "english",
+    "name": "Asbab Al-Nuzul by Al-Wahidi",
+    "slug": "en-asbab-al-nuzul-by-al-wahidi",
+    "source": "https://www.altafsir.com/",
+    "menhec": ["11th-century", "asbab-al-nuzul", "sebebi-nuzul", "occasions-of-revelation", "riwayah", "historical-context"]
+  },
+  {
+    "author_name": "Tanwîr al-Miqbâs min Tafsîr Ibn ‘Abbâs",
+    "id": 73,
+    "language_name": "english",
+    "name": "Tanwîr al-Miqbâs min Tafsîr Ibn ‘Abbâs",
+    "slug": "en-tafsir-ibn-abbas",
+    "source": "https://www.altafsir.com/",
+    "menhec": ["15th-century-compilation", "ibn-abbas", "early-tradition", "riwayah", "narrative-exegesis"]
+  },
+  {
+    "author_name": "Al-Jalalayn",
+    "id": 74,
+    "language_name": "english",
+    "name": "Al-Jalalayn",
+    "slug": "en-al-jalalayn",
+    "source": "https://www.altafsir.com/",
+    "menhec": ["15th-16th-century", "dirayah", "linguistic", "concise-literal", "shafi-context", "word-for-word-clarity"]
+  }
+]
