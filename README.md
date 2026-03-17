@@ -37,10 +37,147 @@ This skill enables LLMs to fetch appropriate tafsir texts for any Quranic verse 
 - **Detailed Categorization**: Each tafsir categorized by 5-8 menhec attributes
 - **Historical Context**: Period-based selection (10th-21st century works)
 
-### 🤖 **LLM-Optimized Design**
-- **Two-Layer Synonym Handling**: LLM handles normalization, script provides fallback
-- **Context-Aware Prompts**: LLM can analyze user intent and select optimal parameters
-- **Semantic Understanding**: Natural language parsing for verse references and preferences
+### 🤖 **LLM Integration & Triggering**
+
+### How LLMs Should Use This Skill
+
+LLMs should follow this workflow when users request tafsir:
+
+#### 1. Parse User Request
+```python
+def parse_tafsir_request(user_input: str) -> dict:
+    """
+    Extract parameters from user input.
+    
+    Returns:
+        dict: {
+            "verse": str,           # e.g., "2:255", "Al-Baqarah 255", "1:1"
+            "slug": str or None,    # specific tafsir slug if mentioned
+            "menhec": str or None,  # methodology if specified
+            "verbose": bool         # if user wants detailed output
+        }
+    """
+```
+
+#### 2. Analyze Context & Select Menhec
+- **If user mentions specific tafsir**: Use `--slug` parameter
+- **If user mentions methodology**: Normalize to standard menhec terms
+- **If no preference**: Default to `riwayah` (narrative-based)
+- **Consider user context**: Language, school, style preferences
+
+#### 3. Build Command
+```bash
+# Basic structure
+python3 scripts/fetch_tafsir.py --verse "{verse}" [--slug "{slug}" | --menhec "{menhec}"] [--verbose]
+
+# Examples:
+python3 scripts/fetch_tafsir.py --verse "2:255" --menhec "riwayah"
+python3 scripts/fetch_tafsir.py --verse "1:1" --menhec "ishari"
+python3 scripts/fetch_tafsir.py --verse "Al-Baqarah 255" --slug "en-tafisr-ibn-kathir" --verbose
+```
+
+#### 4. Execute & Format Output
+- Execute the command via subprocess or OpenClaw's exec tool
+- Capture output and format for user presentation
+- Handle errors gracefully with user-friendly messages
+
+### LLM Prompt Template
+
+```
+When user requests tafsir:
+
+1. **Extract verse reference** (any format: "2:255", "Bakara 255", "surah 1 verse 1")
+2. **Determine tafsir preference**:
+   - If specific tafsir mentioned (Ibn Kathir, Al-Jalalayn, etc.) → use --slug
+   - If methodology mentioned (mystical, narrative, jurisprudential) → normalize to menhec
+   - If no preference → default to --menhec "riwayah"
+3. **Consider context** (optional):
+   - Language preference → add "arabic" or "english" to menhec
+   - School preference → add "hanafi", "shafi", "salafi", etc.
+   - Style preference → add "simplified", "modern", "classical", etc.
+4. **Build command** and execute
+5. **Return formatted result** to user
+```
+
+### Example LLM Implementation
+
+```python
+import subprocess
+import json
+
+def fetch_tafsir(verse: str, slug: str = None, menhec: str = None, verbose: bool = False):
+    """Execute tafsir fetch command and return result."""
+    cmd = ["python3", "scripts/fetch_tafsir.py", "--verse", verse]
+    
+    if slug:
+        cmd.extend(["--slug", slug])
+    elif menhec:
+        cmd.extend(["--menhec", menhec])
+    else:
+        # Default to narrative-based tafsir
+        cmd.extend(["--menhec", "riwayah"])
+    
+    if verbose:
+        cmd.append("--verbose")
+    
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        if result.returncode == 0:
+            return result.stdout
+        else:
+            return f"Error: {result.stderr}"
+    except Exception as e:
+        return f"Execution error: {str(e)}"
+
+# Usage in LLM response
+def handle_user_request(user_input: str):
+    # Parse user input (LLM does this)
+    params = parse_user_input(user_input)
+    
+    # Fetch tafsir
+    result = fetch_tafsir(
+        verse=params["verse"],
+        slug=params.get("slug"),
+        menhec=params.get("menhec"),
+        verbose=params.get("verbose", False)
+    )
+    
+    # Format and return to user
+    return format_tafsir_result(result)
+```
+
+### OpenClaw Integration
+
+In OpenClaw, LLMs can use the `exec` tool to run the script:
+
+```python
+# Pseudo-code for OpenClaw agent
+response = exec(
+    command='python3 scripts/fetch_tafsir.py --verse "2:255" --menhec "riwayah"',
+    workdir='/path/to/skill/directory'
+)
+
+# Parse and format the response for user
+if response.success:
+    return format_tafsir_output(response.stdout)
+else:
+    return f"Could not fetch tafsir: {response.stderr}"
+```
+
+### Menhec Normalization Reference
+
+| User Says | LLM Should Extract |
+|-----------|-------------------|
+| "narrative tafsir", "hadith-based" | `menhec="riwayah"` |
+| "mystical tafsir", "allegorical" | `menhec="ishari"` |
+| "rational tafsir", "jurisprudential" | `menhec="dirayah"` |
+| "textual tafsir", "traditional" | `menhec="athari"` |
+| "Sufi tafsir", "spiritual" | `menhec="tasawwuf"` |
+| "modern tafsir", "contemporary" | `menhec="modern"` |
+| "simple tafsir", "brief" | `menhec="simplified"` |
+| "Arabic tafsir" | `menhec="arabic"` (plus default methodology) |
+| "English tafsir" | `menhec="english"` (plus default methodology) |
+
 
 ## 🏗️ Architecture
 
@@ -74,16 +211,92 @@ graph TB
 
 ## 🚀 Quick Start
 
-### Installation
+### Installation for OpenClaw
+
+OpenClaw skills are installed by copying the skill directory to the OpenClaw skills folder:
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/oyilmaztekin/tafsir-api-skill.git
 cd tafsir-api-skill
 
-# Install as OpenClaw skill
-openclaw skills install .
+# 2. Extract the .skill file (if using packaged version)
+tar -xzf tafsir-api.skill -C /path/to/openclaw/skills/
+
+# OR manually copy the skill directory
+cp -r tafsir-api /path/to/openclaw/skills/
+
+# Typical OpenClaw skills path on Linux/macOS:
+# ~/.openclaw/skills/ or /usr/local/share/openclaw/skills/
+# Check your OpenClaw installation for the correct path
+
+# 3. Verify installation
+ls -la /path/to/openclaw/skills/tafsir-api/
 ```
+
+### Manual Installation (Step by Step)
+
+```bash
+# Method 1: Using the packaged .skill file
+cd /path/to/openclaw/skills/
+wget https://github.com/oyilmaztekin/tafsir-api-skill/raw/main/tafsir-api.skill
+tar -xzf tafsir-api.skill
+rm tafsir-api.skill  # Optional: remove the archive after extraction
+
+# Method 2: Clone and copy
+cd /tmp
+git clone https://github.com/oyilmaztekin/tafsir-api-skill.git
+cp -r tafsir-api-skill/tafsir-api /path/to/openclaw/skills/
+
+# Method 3: Direct download and extract
+cd /path/to/openclaw/skills/
+curl -L https://github.com/oyilmaztekin/tafsir-api-skill/archive/main.tar.gz | tar -xz
+mv tafsir-api-skill-main/tafsir-api ./
+rm -rf tafsir-api-skill-main
+```
+
+### Verify Installation
+
+```bash
+# Check if skill is installed
+ls -la /path/to/openclaw/skills/ | grep tafsir
+
+# Test the skill
+cd /path/to/openclaw/skills/tafsir-api
+python3 scripts/fetch_tafsir.py --verse "2:255" --menhec "riwayah"
+
+# Expected output should show tafsir text for Ayat al-Kursi
+```
+
+### Finding Your OpenClaw Skills Path
+
+```bash
+# Common locations for OpenClaw skills:
+echo "Possible OpenClaw skills paths:"
+
+# Linux/macOS user installation
+echo "~/.openclaw/skills/"
+
+# Linux system installation  
+echo "/usr/local/share/openclaw/skills/"
+echo "/opt/openclaw/skills/"
+
+# macOS Homebrew installation
+echo "/usr/local/opt/openclaw/skills/"
+echo "/opt/homebrew/opt/openclaw/skills/"
+
+# Check if openclaw command provides info
+openclaw --help | grep -i skill || echo "Check OpenClaw documentation"
+```
+
+### Post-Installation
+
+After installation, the skill will be available to OpenClaw agents. LLMs can now use the skill by:
+
+1. Parsing user requests for tafsir
+2. Extracting verse references and methodology preferences
+3. Calling the appropriate script with correct parameters
+4. Formatting and returning the results to users
 
 ### Basic Usage
 
